@@ -3,6 +3,10 @@ import Image from 'next/image'
 import { LiaSlidersHSolid } from "react-icons/lia";
 import { BsFillGridFill } from "react-icons/bs";
 import { LuGalleryVertical } from "react-icons/lu";
+import { HiOutlineTrophy } from "react-icons/hi2";
+import { BiSupport } from "react-icons/bi";
+import { PiHandHeartBold } from "react-icons/pi";
+import { AiTwotoneSafetyCertificate } from "react-icons/ai";
 
 
 function page() {
@@ -12,7 +16,7 @@ function page() {
         <Image src="/images/Group 78 (1).png" alt='banner' className='w-screen' unoptimized placeholder='empty' height={100} width={100}></Image>
 </div>
 
-<div className='bg-amber-100 grid sm:grid-cols-2 grid-cols-1'>
+<div className='bg-amber-100 grid md:grid-cols-2 grid-cols-1'>
 <div className='flex sm:p-12 p-4'>
 <LiaSlidersHSolid className='md:text-2xl sm:ml-20 mt-2 sm:text-xl' />
 <p className='md:text-2xl text-xl ml-2'>Filter</p>
@@ -23,7 +27,7 @@ function page() {
 </div>
 </div>
 
-<div className='flex gap-6 md:p-12 md:ml-20 mb-4'>
+<div className='flex gap-6 md:p-12 ml-10 lg:ml-20 mb-4'>
   <h1 className='sm:font-semibold mt-2'>show</h1>
   <p className='bg-white w-10 p-2 h-10'>16</p>
   <p className='sm:font-semibold mt-2'>sort by</p>
@@ -31,94 +35,60 @@ function page() {
 </div>
 </div>
 
-<div className="grid lg:grid-cols-4 grid-cols-2 md:grid-cols-3 mt-20  h-80">
- 
-<div className="h-82 w-52 bg-slate-100 md:ml-10 flex flex-col items-center justify-between mt-6">
-<Image src="/images/product-4.png" alt="product-img" height={400} width={400} className="h-60"></Image>
-  <p className="mt-4 font-semibold">Syltherine</p>
-  <p className="text-gray-400">style cafe chair</p>
-  <div className="flex gap-2 mb-4">
-  <p>Rp 2500,000</p>
-  <p className="text-gray-400 font-semibold">Rp 3500,000</p>
+<div className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 mt-20 mb-10 mx-auto">
+  {[
+    { src: '/images/product-4.png', label: 'Syltherine', desc: 'style cafe chair', price: 'Rp 2500,000', oldPrice: 'Rp 3500,000' },
+    { src: '/images/product-5.png', label: 'Leviosa', desc: 'style cafe chair', price: 'Rp 2500,000', oldPrice: 'Rp 3500,000' },
+    { src: '/images/product-6.png', label: 'Lolito', desc: 'luxury sofa set', price: 'Rp 700,000', oldPrice: 'Rp 1400,000' },
+    { src: '/images/product-7.jpeg', label: 'Respira', desc: 'Outdoor bar table and stool', price: 'Rp 500,000' },
+    { src: '/images/product-8.png', label: 'Grifo', desc: 'night lamp', price: 'Rp 1,500,000' },
+    { src: '/images/product-9.png', label: 'Muggo', desc: 'small mug', price: 'Rp 150,000' },
+    { src: '/images/product-10.jpeg', label: 'Pingky', desc: 'cute bed set', price: 'Rp 700,000', oldPrice: 'Rp 14,000,000' },
+    { src: '/images/product-11.jpeg', label: 'Potty', desc: 'minimalist flower pot', price: 'Rp 5000,000' },
+  ].map((item, index) => (
+    <div key={index} className="bg-slate-100 p-4 text-center">
+      <Image src={item.src} alt="product-img" height={400} width={400} className="h-60 mx-auto"></Image>
+      <p className="mt-4 font-semibold">{item.label}</p>
+      <p className="text-gray-400">{item.desc}</p>
+      <div className="flex justify-center gap-2 mt-2">
+        <p className="font-semibold">{item.price}</p>
+        {item.oldPrice && <p className="text-gray-400 line-through">{item.oldPrice}</p>}
+      </div>
+    </div>
+  ))}
   </div>
-  </div>
-
-  <div className="h-80 w-52 bg-slate-100 ml-10 flex flex-col items-center justify-between mt-6">
-<Image src="/images/product-5.png" alt="product-img" height={400} width={400} className="h-60"></Image>
-  <p className="mt-4 font-semibold">Leviosa</p>
-  <p className="text-gray-400">style cafe chair</p>
-  <div className="flex gap-2 mb-4">
-  <p>Rp 2500,000</p>
-  <p className="text-gray-400 font-semibold">Rp 3500,000</p>
-  </div>
-  </div>
-
-  <div className="h-80 w-52 bg-slate-100 md:ml-10 flex flex-col items-center justify-between mt-12">
-<Image src="/images/product-6.png" alt="product-img" height={400} width={400} className="h-60"></Image>
-  <p className="mt-4 font-semibold">Lolito</p>
-  <p className="text-gray-400">luxurey sofa set</p>
-  <div className="flex gap-2 mb-4">
-  <p>Rp 700,000</p>
-  <p className="text-gray-400 font-semibold">Rp 1400,000</p>
-  </div>
-  </div>
-
-  <div className="h-80 w-52 bg-slate-100 ml-10 flex flex-col items-center justify-between mt-12">
-<Image src="/images/product-7.jpeg" alt="product-img" height={400} width={400} className="h-60"></Image>
-  <p className="mt-4 font-semibold">Respira</p>
-  <p className="text-gray-400">Outdoor bar table and stool</p>
-  <div className="flex gap-2 mb-4 font-semibold">
-  <p>Rp 500,000</p>
-  </div>
-  </div>
-
-</div>
-
-<div className="grid lg:grid-cols-4 grid-cols-2 md:grid-cols-3">
-
-<div className="h-80 w-52 bg-slate-100 md:ml-10 flex flex-col items-center justify-between mt-20 lg:mt-12">
-<Image src="/images/product-8.png" alt="product-img" height={400} width={400} className="h-60"></Image>
-  <p className="mt-4 font-semibold">Grifo</p>
-  <p className="text-gray-400">night lamp</p>
-  <div className="flex gap-2 mb-4 font-semibold">
-  <p>Rp 1,500,000</p>
-  </div>
-  </div>
-
-  <div className="h-80 w-52 bg-slate-100 ml-10 flex flex-col items-center justify-between mt-20 lg:mt-12">
-<Image src="/images/product-9.png" alt="product-img" height={400} width={400} className="h-60"></Image>
-  <p className="mt-4 font-semibold">Muggo</p>
-  <p className="text-gray-400">small mug</p>
-  <div className="flex gap-2 mb-4 font-semibold">
-  <p>Rp 150,000</p>
-  </div>
-  </div>
-
-  <div className="h-80 w-52 bg-slate-100 md:ml-10 flex flex-col items-center justify-between mt-10">
-<Image src="/images/product-10.jpeg" alt="product-img" height={400} width={400} className="h-60"></Image>
-  <p className="mt-4 font-semibold">Pingky</p>
-  <p className="text-gray-400">cute bed set</p>
-  <div className="flex gap-2 mb-4">
-  <p className="font-semibold">Rp 700,000</p>
-  <p className="text-gray-400">Rp 14,000,000</p>
-  </div>
-  </div>
-
-  <div className="h-80 w-52 bg-slate-100 ml-10 flex flex-col items-center justify-between mt-10">
-<Image src="/images/product-11.jpeg" alt="product-img" height={400} width={400} className="h-60"></Image>
-  <p className="mt-4  font-semibold">Potty</p>
-  <p className="text-gray-400">minimalist flower pot</p>
-  <div className="flex gap-2 mb-4">
-  <p className="font-semibold">Rp 5000,000</p>
-  </div>
-  </div>
-</div>
 
 <div className='mt-28 flex justify-center gap-10 items-center'>
   <p className='bg-yellow-600 h-10 w-10 p-3 rounded text-white'>1</p>
-  <p className='bg-amber-50 h-10 w-10 p-3 rounded'>2</p>
-  <p className='bg-amber-50 h-10 w-10 p-3 rounded'>3</p>
-  <button className='bg-amber-50 h-10 w-16 p-3 rounded'>Next</button>
+  <p className='bg-amber-100 h-10 w-10 p-3 rounded'>2</p>
+  <p className='bg-amber-100 h-10 w-10 p-3 rounded'>3</p>
+  <button className='bg-amber-100 h-10 w-16 p-3 rounded'>Next</button>
+</div>
+
+<div className='sm:flex justify-between mt-20 bg-amber-100 p-10'>
+<div>
+<HiOutlineTrophy className='text-2xl'/>
+  <h1>High Quality</h1>
+  <p>Creafted from top material</p>
+</div>
+
+<div className='mt-4 sm:mt-0'>
+<AiTwotoneSafetyCertificate className='text-2xl'/>
+<h1>Warranty Protection</h1>
+<p>Over 2 years</p>
+</div>
+
+<div className='mt-4 sm:mt-0'>
+<PiHandHeartBold className='text-2xl'/>
+<h1>Free Shipping</h1>
+<p>Order over 150$</p>
+</div>
+
+<div className='mt-4 sm:mt-0'>
+<BiSupport className='text-2xl' />
+<h1>24/7 Support</h1>
+<p>Dedicated Support</p>
+</div>
 </div>
 </>
   )

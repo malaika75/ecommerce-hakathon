@@ -27,10 +27,16 @@ function Navbar() {
   <DropdownMenuContent>
     <DropdownMenuLabel></DropdownMenuLabel>
     <DropdownMenuSeparator />
+    <Link href='/'>
     <DropdownMenuItem>Home</DropdownMenuItem>
+    </Link>
+    <Link href='/shop'>
     <DropdownMenuItem>Shop</DropdownMenuItem>
+    </Link>
     <DropdownMenuItem>Blog</DropdownMenuItem>
+    <Link href='/contact'>
     <DropdownMenuItem>Contact</DropdownMenuItem>
+    </Link>
   </DropdownMenuContent>
 </DropdownMenu>
 </div>
@@ -49,7 +55,9 @@ function Navbar() {
             <li className='cursor-pointer'>Shop</li>
 </Link>
             <li className='cursor-pointer'>Blog</li>
+            <Link href='/contact'>
             <li className='cursor-pointer'>Contact</li>
+            </Link>
         </ul>
     </div>
     <div className='flex md:mr-20 gap-4 md:gap-10'>

@@ -3,7 +3,7 @@ import React from 'react'
 function Footer() {
   return (
     <>
-    <div className='mt-40 grid  lg:grid-cols-4  md:grid-cols-3  border-t p-4 sm:p-10'>
+    <div className='mt40 grid  lg:grid-cols-4  md:grid-cols-3  border-t p-4 sm:p-10'>
         <div className='sm:ml-10'>
         <h1 className='text-2xl font-bold'>Furniro.</h1>
         <p className='text-gray-400 mt-6'>400 universities Drives 200 coral</p>
