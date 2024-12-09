@@ -12,7 +12,7 @@ export default function Home() {
         <h1 className="text-2xl w-6/12 text-yellow-700 font-bold ">Discover Our New Collection</h1>
         <p className="w-9/12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid nihil dolorum itaque dolor. Incidunt, similique veritatis non quos ratione assumenda.</p>
         <Link href='/product-details'>
-        <button className="p-4 bg-yellow-700 text-white px-8">Buy Now</button>
+        <button className="p-4 bg-yellow-700 text-white px-8 cursor-pointer">Buy Now</button>
         </Link>
         </div>
       </div>
