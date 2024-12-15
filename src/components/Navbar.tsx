@@ -50,14 +50,20 @@ function Navbar() {
         <ul className='hidden lg:flex gap-4 lg:gap-10 xl:font-semibold'>
 <Link href="/">
             <li className='cursor-pointer'>Home</li>
-            </Link>
+</Link>
+
 <Link href="/shop">
             <li className='cursor-pointer'>Shop</li>
 </Link>
+
+<Link href='/blog'>
             <li className='cursor-pointer'>Blog</li>
-            <Link href='/contact'>
+</Link>
+
+<Link href='/contact'>
             <li className='cursor-pointer'>Contact</li>
-            </Link>
+</Link>
+
         </ul>
     </div>
     <div className='flex md:mr-20 gap-4 md:gap-10'>
@@ -65,8 +71,9 @@ function Navbar() {
     <FaRegUser />
     <IoSearch />
     <FaRegHeart />
-    <BsCart3 />
-
+<Link href='/cart'>
+    <BsCart3 className='cursor-pointer'/>
+</Link>
     </div>
 </div>
     </>

@@ -3,18 +3,31 @@ import Image from 'next/image'
 import { LiaSlidersHSolid } from "react-icons/lia";
 import { BsFillGridFill } from "react-icons/bs";
 import { LuGalleryVertical } from "react-icons/lu";
-import { HiOutlineTrophy } from "react-icons/hi2";
-import { BiSupport } from "react-icons/bi";
-import { PiHandHeartBold } from "react-icons/pi";
-import { AiTwotoneSafetyCertificate } from "react-icons/ai";
-
+import Benefits from '@/components/Benefits';
+import { IoIosArrowForward } from "react-icons/io";
+import Link from 'next/link';
 
 function page() {
   return (
     <>
+
     <div>
-        <Image src="/images/Group 78 (1).png" alt='banner' className='w-screen' unoptimized placeholder='empty' height={100} width={100}></Image>
-</div>
+                <Image src='/images/Rectangle 1.png' alt='banner' height={100} width={100} className='relative w-screen mb-20' unoptimized placeholder='empty' quality={100}></Image>
+                
+                <div className='absolute lg:top-28 sm:top-20 top-[80px] left-1/2 xl:left-1/3 xl:ml-44 -ml-4'>
+                <Image src='/images/logo.png' alt='banner' height={100} width={100} className='h-10 w-10 sm:h-20 sm:w-20 xl:h-30 xl:w-30'
+                unoptimized placeholder='empty' quality={100}></Image>
+                <h1 className='font-bold sm:text-2xl md:text-4xl -mt-2 sm:-mt-3 sm:ml-2 md:ml-0'>Shop</h1>
+                <div className='flex md:mt-2 -ml-4 -mt-1'>
+                <Link href='/'>
+                <p className='font-semibold sm:ml-2'>Home</p>
+                </Link>
+                <IoIosArrowForward className='mt-1 font-semibold'/>
+                <p className='sm:ml-2'>shop</p>
+                </div>
+                </div>
+            </div>
+        
 
 <div className='bg-amber-100 grid md:grid-cols-2 grid-cols-1'>
 <div className='flex sm:p-12 p-4'>
@@ -65,31 +78,7 @@ function page() {
   <button className='bg-amber-100 h-10 w-16 p-3 rounded'>Next</button>
 </div>
 
-<div className='sm:flex justify-between mt-20 bg-amber-100 p-10'>
-<div>
-<HiOutlineTrophy className='text-2xl'/>
-  <h1>High Quality</h1>
-  <p>Creafted from top material</p>
-</div>
-
-<div className='mt-4 sm:mt-0'>
-<AiTwotoneSafetyCertificate className='text-2xl'/>
-<h1>Warranty Protection</h1>
-<p>Over 2 years</p>
-</div>
-
-<div className='mt-4 sm:mt-0'>
-<PiHandHeartBold className='text-2xl'/>
-<h1>Free Shipping</h1>
-<p>Order over 150$</p>
-</div>
-
-<div className='mt-4 sm:mt-0'>
-<BiSupport className='text-2xl' />
-<h1>24/7 Support</h1>
-<p>Dedicated Support</p>
-</div>
-</div>
+<Benefits/>
 </>
   )
 }
