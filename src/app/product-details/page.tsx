@@ -7,13 +7,11 @@ import { FaFacebook } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa6";
 import { FaTwitterSquare } from "react-icons/fa";
 import ShowMore from '@/components/ShowMore';
-import { useState } from "react"
+
 
 
 function page() {
-  const [path , setpath] = useState("")
-
-return (
+  return (
     <>
     <div className='flex bg-amber-50 p-10'>
       <div className='ml-10 flex p-2'>
@@ -48,7 +46,7 @@ return (
     
 
     <div className=' ml-3'>
-      <Image path ? path : src='/images/blue-sofa-img.png' alt='product' height={100} width={900} className='ml-6 bg-amber-50'></Image>
+      <Image src='/images/blue-sofa-img.png' alt='product' height={100} width={900} className='ml-6 bg-amber-50'></Image>
     </div>
     </div>
 
