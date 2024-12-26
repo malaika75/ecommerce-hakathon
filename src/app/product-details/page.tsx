@@ -7,6 +7,7 @@ import { FaFacebook } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa6";
 import { FaTwitterSquare } from "react-icons/fa";
 import ShowMore from '@/components/ShowMore';
+import Link from 'next/link'
 
 
 
@@ -14,13 +15,21 @@ function page() {
   return (
     <>
     <div className='flex bg-amber-50 p-10'>
-      <div className='ml-10 flex p-2'>
+      <div className='sm:ml-10 flex p-2'>
+        
+        
     <h1 className='mt-1'>Home</h1>
-    <MdKeyboardArrowRight className='ml-4 mt-2'/>
-    <h1 className='ml-6 mt-1'>Shop</h1>
-    <MdKeyboardArrowRight className='ml-4 mt-2'/>
+    <Link href='/'>
+    <MdKeyboardArrowRight className='mt-2'/>
+    </Link>
+
+
+    <h1 className='ml-6 mt-1 '>Shop</h1>
+    <Link href='/shop'>
+    <MdKeyboardArrowRight className='mt-2'/>
+  </Link>  
     </div>
-    <h1 className='border-l border-black p-2 ml-20 font-bold'>Assgaard sofa</h1>
+    <h1 className='border-l border-black p-2 sm:ml-20  ml-6 font-bold'>Assgaard sofa</h1>
    </div>
 
    <div className='grid lg:grid-cols-2 grid-cols-1 mt-20'>
@@ -32,7 +41,7 @@ function page() {
     </div>
 
     <div className='mt-2'>
-      <Image src='/images/blue-sofa-img2.png' alt='product' height={100} width={100} className='h-20 w-40 bg-amber-50' ></Image>
+      <Image src='/images/blue-sofa-img2.png' alt='product' height={100} width={100} className='h-20 w-40 bg-amber-50'unoptimized ></Image>
     </div>
 
     <div className='mt-2'>
@@ -45,13 +54,13 @@ function page() {
     </div>
     
 
-    <div className=' ml-3'>
-      <Image src='/images/blue-sofa-img.png' alt='product' height={100} width={900} className='ml-6 bg-amber-50'></Image>
+    <div className='sm:ml-3'>
+      <Image src='/images/blue-sofa-img.png' alt='product' height={100} width={900} className='sm:ml-6 bg-amber-50'></Image>
     </div>
     </div>
 
 
-    <div className='lg:ml-32 ml-10 mt-4'>
+    <div className='lg:ml-32 sm:ml-10 ml-2 mt-4'>
       <h1 className='text-2xl font-semibold'>Asgaard Sofa</h1>
       <p className='ml-2'>Rs: 250,000.00</p>
       <div className='flex mt-4 m-2'>
@@ -82,9 +91,9 @@ function page() {
 </div>
 
 <div className='flex gap-4'>
-  <div className='flex justify-between border-black border-2 w-40 mt-6 p-4' >
+  <div className='flex justify-between border-black border-2 w-40 mt-6 sm:p-4' >
   <button>-</button>
-  1
+  <p>1</p>
   <button>+</button>
 </div>
 
@@ -109,10 +118,10 @@ function page() {
 
 <div className='mt-20 border-t'>
 
-<div className='flex justify-center text-center mt-10 gap-6'>
+<div className='flex justify-center text-center mt-10 sm:gap-6 gap-2'>
 <h1 className='font-semibold ml-6'>Depscreption</h1>
-<p className='ml-10 text-gray-400'>Additional Information</p>
-<p className='text-gray-400'>Reviews [5]</p>
+<p className='sm:ml-10 ml-4 text-gray-400'>Additional Information</p>
+<p className='text-gray-400 -ml-2'>Reviews [5]</p>
 </div>
 
 <div className='textcenter flex flex-col justify-center items-center'>

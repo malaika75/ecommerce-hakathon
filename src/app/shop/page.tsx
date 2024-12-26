@@ -22,13 +22,13 @@ function page() {
           quality={100}
         ></Image>
 
-        <div className="absolute lg:top-28 sm:top-20 top-[80px] left-1/2 xl:left-1/3 xl:ml-44 -ml-4">
+        <div className="absolute lg:top-28 sm:top-20 top-[72px] left-1/2 xl:left-1/3 xl:ml-44 -ml-4">
           <Image
             src="/images/logo.png"
             alt="banner"
             height={100}
             width={100}
-            className="h-10 w-10 sm:h-20 sm:w-20 xl:h-30 xl:w-30"
+            className="h-8 w-8 sm:h-20 sm:w-20 xl:h-30 xl:w-30"
             unoptimized
             placeholder="empty"
             quality={100}
@@ -36,7 +36,7 @@ function page() {
           <h1 className="font-bold sm:text-2xl md:text-4xl -mt-2 sm:-mt-3 sm:ml-2 md:ml-0">
             Shop
           </h1>
-          <div className="flex md:mt-2 -ml-4 -mt-1">
+          <div className="flex md:mt-2 md:-ml-4 -ml-6 -mt-1">
             <Link href="/">
               <p className="font-semibold sm:ml-2">Home</p>
             </Link>
