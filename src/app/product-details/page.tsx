@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { MdKeyboardArrowRight } from "react-icons/md";
 import Image from 'next/image';
@@ -5,10 +6,14 @@ import { FaStar } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa6";
 import { FaTwitterSquare } from "react-icons/fa";
+import ShowMore from '@/components/ShowMore';
+import { useState } from "react"
 
 
 function page() {
-  return (
+  const [path , setpath] = useState("")
+
+return (
     <>
     <div className='flex bg-amber-50 p-10'>
       <div className='ml-10 flex p-2'>
@@ -43,7 +48,7 @@ function page() {
     
 
     <div className=' ml-3'>
-      <Image src='/images/blue-sofa-img.png' alt='product' height={100} width={900} className='ml-6 bg-amber-50'></Image>
+      <Image path ? path : src='/images/blue-sofa-img.png' alt='product' height={100} width={900} className='ml-6 bg-amber-50'></Image>
     </div>
     </div>
 
@@ -139,7 +144,7 @@ function page() {
   <h1 className='mt-10 text-center font-bold text-2xl mb-6'>Related Products</h1>
 </div>
 
-<div className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 mt-20 mb-10 mx-auto">
+<div className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 mt-20 mb-10 mx-6">
   {[
     { src: '/images/product-7.jpeg', label: 'Respira', desc: 'Outdoor bar table and stool', price: 'Rp 500,000' },
     { src: '/images/product-4.png', label: 'Syltherine', desc: 'style cafe chair', price: 'Rp 2500,000', oldPrice: 'Rp 3500,000' },
@@ -147,7 +152,7 @@ function page() {
     { src: '/images/product-6.png', label: 'Lolito', desc: 'luxury sofa set', price: 'Rp 700,000', oldPrice: 'Rp 1400,000' },
   ].map((item, index) => (
     <div key={index} className="bg-slate-100 p-4 text-center">
-      <Image src={item.src} alt="product-img" height={400} width={400} className="h-60 mx-auto ml-4"></Image>
+      <Image src={item.src} alt="product-img" height={400} width={400} className="h-60 mx-auto"></Image>
       <p className="mt-4 font-semibold">{item.label}</p>
       <p className="text-gray-400">{item.desc}</p>
       <div className="flex justify-center gap-2 mt-2">
@@ -158,9 +163,9 @@ function page() {
   ))}
   </div>
 
-  <div className="text-center mt-20 mb-10 ml-10">
-<button className="border-2 border-yellow-600 px-20 p-3 text-yellow-600">Show More</button>
-</div>
+  <ShowMore/>
+
+  
     </>
   )
 }

@@ -30,10 +30,15 @@ function Navbar() {
     <Link href='/'>
     <DropdownMenuItem>Home</DropdownMenuItem>
     </Link>
+
     <Link href='/shop'>
     <DropdownMenuItem>Shop</DropdownMenuItem>
     </Link>
+
+<Link href='/blog'>
     <DropdownMenuItem>Blog</DropdownMenuItem>
+</Link>
+
     <Link href='/contact'>
     <DropdownMenuItem>Contact</DropdownMenuItem>
     </Link>
@@ -68,12 +73,15 @@ function Navbar() {
     </div>
     <div className='flex md:mr-20 gap-4 md:gap-10'>
     
-    <FaRegUser />
-    <IoSearch />
-    <FaRegHeart />
+    <FaRegUser className='text-xl'/>
+    <IoSearch className='text-xl'/>
+    <FaRegHeart className='text-xl'/>
+    <div>
 <Link href='/cart'>
-    <BsCart3 className='cursor-pointer'/>
+    <BsCart3 className='cursor-pointer relative text-xl'/>
 </Link>
+<span className='absolute top-9  bg-red-400 h-5 w-5 text-center rounded-full ml-3'>0</span>
+</div>
     </div>
 </div>
     </>

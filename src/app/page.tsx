@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaRegHeart } from "react-icons/fa";
+import ShowMore from "@/components/ShowMore";
 
 export default function Home() {
   return (
@@ -49,7 +51,7 @@ export default function Home() {
     { src: '/images/product-10.jpeg', label: 'Pingky', desc: 'cute bed set', price: 'Rp 700,000', oldPrice: 'Rp 14,000,000' },
     { src: '/images/product-11.jpeg', label: 'Potty', desc: 'minimalist flower pot', price: 'Rp 5000,000' },
   ].map((item, index) => (
-    <div key={index} className="bg-slate-100 p-4 text-center">
+    <div key={index} className="group relative bg-slate-100 p-4 text-center">
       <Image src={item.src} alt="product-img" height={400} width={400} className="h-60 mx-auto"></Image>
       <p className="mt-4 font-semibold">{item.label}</p>
       <p className="text-gray-400">{item.desc}</p>
@@ -57,14 +59,21 @@ export default function Home() {
         <p className="font-semibold">{item.price}</p>
         {item.oldPrice && <p className="text-gray-400 line-through">{item.oldPrice}</p>}
       </div>
+
+      <div className="absolute group-hover:opacity-60 object-cover inset-0 opacity-0 bg-black h-60 w-72 mx-auto transform translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out z-10 text-center mt-4">
+      <div className='bg-white text-yellow-700 border-2 w-40 mt-14 p-4 text-center font-semibold ml-14 cursor-pointer'>
+       Add to cart
+      </div>
+<div className="flex p-6 gap-4 justify-center text-xl">
+      <button className="text-white hover:scale-125">+checkout</button>
+      <FaRegHeart className="text-white cursor-pointer hover:text-red-500 hover:scale-100"/>
+      </div>
+</div>
     </div>
   ))}
 </div>
 
-
-<div className="text-center mt-20">
-<button className="border-2 border-yellow-600 px-20 p-3 text-yellow-600">Show More</button>
-</div>
+<ShowMore/>
 
 <div className="h-[500px] bg-amber-50 mt-10 flex">
   <div className="md:p-20 p-4">
@@ -85,27 +94,26 @@ export default function Home() {
   </div>
 
 
-  <div className="mt-28 text-center">
-    <p>Share your setup with</p>
-    <p className="text-2xl font-bold">#FuniroFurniture</p>
-  </div>
+<div className="mt-28 text-center">
+<p>Share your setup with</p>
+<p className="text-2xl font-bold">#FurniroFurniture</p>
+</div>
 
-{/* <div className="flex"> */}
-  <div className="mt-14 flex mx-4">
-    <div>
-    <Image src='/images/product-14.png' alt='product' className='w-20 xl:w-40 xl:h-60 h-40' height={400} width={100}></Image>
+<div className="mt-14 flex mx-4">
+<div>
+<Image src='/images/product-14.png' alt='product' className='w-20 xl:w-40 xl:h-60 h-40' height={400} width={100}></Image>
 </div>
 
 <div>
-    <Image src='/images/product-16.png' alt='product' className='ml-2 sm:mt-4 h-40 w-40 sm:w-80 mt-7' height={100} width={200}></Image>
+<Image src='/images/product-16.png' alt='product' className='ml-2 sm:mt-4 h-40 w-40 sm:w-80 mt-7' height={100} width={200}></Image>
 </div>
 
 <div>
-    <Image src='/images/product-17.png' alt='product' className='mx-4 h-50 sm:h-40 xl:h-80 w40 sm:w-60 xl:mx-6' height={100} width={100}></Image>
+<Image src='/images/product-17.png' alt='product' className='mx-4 h-50 sm:h-40 xl:h-80 w40 sm:w-60 xl:mx-6' height={100} width={100}></Image>
 </div>
 
 <div>
-    <Image src='/images/product-18.png' alt='product' className='hidden sm:flex sm:mt-10 xl:ml10 h-40 xl:h-40 mb-8 xl:w-80 xl:mx-4' height={100} width={200}></Image>
+<Image src='/images/product-18.png' alt='product' className='hidden sm:flex sm:mt-10 xl:ml10 h-40 xl:h-40 mb-8 xl:w-80 xl:mx-4' height={100} width={200}></Image>
 </div>
 
 <div>
@@ -115,21 +123,24 @@ export default function Home() {
 
 <div className="flex px-6 mb-20">
 <div>
-    <Image src='/images/product-20.png' alt='product' className='w-40' height={100} width={200}></Image>
+<Image src='/images/product-20.png' alt='product' className='w-40' height={100} width={200}></Image>
 </div>
 
 <div>
-    <Image src='/images/product-21.png' alt='product' className='mt-2 ml-2' height={100} width={400}></Image>
+<Image src='/images/product-21.png' alt='product' className='mt-2 ml-2' height={100} width={400}></Image>
 </div>
 
 <div>
-    <Image src='/images/product-22.png' alt='product' className='sm:mt-8 ml-4 h-40 mt-6 w-60' height={100} width={200}></Image>
+<Image src='/images/product-22.png' alt='product' className='sm:mt-8 ml-4 h-40 mt-6 w-60' height={100} width={200}></Image>
 </div>
 
 <div>
-    <Image src='/images/product-23.png' alt='product' className='hidden sm:flex sm:ml-6 mt-2 lg:w-40 xl:w-60' height={100} width={100}></Image>
+<Image src='/images/product-23.png' alt='product' className='hidden sm:flex sm:ml-6 mt-2 lg:w-40 xl:w-60' height={100} width={100}></Image>
 </div>
 </div>
-  
+
+
+
+
 </>
 )}

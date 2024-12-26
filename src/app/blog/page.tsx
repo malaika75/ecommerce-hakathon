@@ -14,11 +14,11 @@ function page() {
     <div>
             <Image src='/images/Rectangle 1.png' alt='banner' height={100} width={100} className='relative w-screen mb-20' unoptimized placeholder='empty' quality={100}></Image>
             
-            <div className='absolute lg:top-28 sm:top-20 top-[80px] left-1/2 xl:left-1/3 xl:ml-44 -ml-4'>
-            <Image src='/images/logo.png' alt='banner' height={100} width={100} className='h-10 w-10 sm:h-20 sm:w-20 xl:h-30 xl:w-30'
+            <div className='absolute lg:top-28 sm:top-20 top-[72px] left-1/2 xl:left-1/3 xl:ml-44 -ml-4'>
+            <Image src='/images/logo.png' alt='banner' height={100} width={100} className='h-8 w-8 sm:h-20 sm:w-20 xl:h-30 xl:w-30'
             unoptimized placeholder='empty' quality={100}></Image>
             <h1 className='font-bold sm:text-2xl md:text-4xl -mt-2 sm:-mt-3 sm:ml-2 md:ml-0'>Blog</h1>
-            <div className='flex md:mt-2 -ml-6 -mt-1'>
+            <div className='flex md:mt-2 -ml-6 sm:-ml-4 -mt-1'>
             <Link href='/'>
             <p className='font-semibold sm:ml-2'>Home</p>
             </Link>
@@ -43,9 +43,9 @@ function page() {
     <p className='ml-2'>Wood</p>
     </div>
 
-    <h1 className='font-bold text-2xl mt-4 sm:mx-20 mx-2'>Going All-in With minllenial design</h1>
-    <p className='mt-6 sm:mx-20 mx-4 text-gray-400 w-11/12'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi omnis sunt suscipit sequi commodi, et ullam adipisci quam debitis ad? Animi nulla neque eos molestias libero veritatis sapiente, corrupti eveniet. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores est officia, eaque obcaecati alias excepturi nulla voluptas, tenetur laudantium dolor asperiores? Doloribus aspernatur ea possimus modi labore? Unde, provident nobis!</p>
-    <p className='mt-6 sm:mx-20 mx-6 font-semibold border-b-2 border-black w-fit'>Read more</p>
+    <h1 className='font-bold text-2xl mt-4 lg:mx-20 mx-2 sm:mx-8'>Going All-in With minllenial design</h1>
+    <p className='mt-6 lg:mx-20 mx-4 text-gray-400 w-11/12 sm:mx-8'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi omnis sunt suscipit sequi commodi, et ullam adipisci quam debitis ad? Animi nulla neque eos molestias libero veritatis sapiente, corrupti eveniet. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores est officia, eaque obcaecati alias excepturi nulla voluptas, tenetur laudantium dolor asperiores? Doloribus aspernatur ea possimus modi labore? Unde, provident nobis!</p>
+    <p className='mt-6 lg:mx-20 mx-6 font-semibold border-b-2 border-black w-fit sm:mx-8'>Read more</p>
     </div>
 
     <div>
@@ -60,9 +60,9 @@ function page() {
     <p className='ml-2'>Wood</p>
     </div>
 
-    <h1 className='font-bold text-2xl mt-4 sm:mx-20 mx-2'>Exploring new ways of Decorating</h1>
-    <p className='mt-6 sm:mx-20 text-gray-400 w-11/12 mx-4 '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi omnis sunt suscipit sequi commodi, et ullam adipisci quam debitis ad? Animi nulla neque eos molestias libero veritatis sapiente, corrupti eveniet. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores est officia, eaque obcaecati alias excepturi nulla voluptas, tenetur laudantium dolor asperiores? Doloribus aspernatur ea possimus modi labore? Unde, provident nobis!</p>
-    <p className='mt-6 sm:mx-20 mx-6 font-semibold border-b-2 border-black w-fit'>Read more</p>
+    <h1 className='font-bold text-2xl mt-4 lg:mx-20 mx-2 sm:mx-8'>Exploring new ways of Decorating</h1>
+    <p className='mt-6 lg:mx-20 text-gray-400 w-11/12 mx-4 sm:mx-8'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi omnis sunt suscipit sequi commodi, et ullam adipisci quam debitis ad? Animi nulla neque eos molestias libero veritatis sapiente, corrupti eveniet. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores est officia, eaque obcaecati alias excepturi nulla voluptas, tenetur laudantium dolor asperiores? Doloribus aspernatur ea possimus modi labore? Unde, provident nobis!</p>
+    <p className='mt-6 lg:mx-20 mx-6 font-semibold border-b-2 border-black w-fit sm:mx-8'>Read more</p>
     </div>
 
     <div>
@@ -77,9 +77,9 @@ function page() {
     <p className='ml-2'>Wood</p>
     </div>
 
-    <h1 className='font-bold text-2xl mt-4 sm:mx-20 mx-2'>Handmade pieces that took time to make</h1>
-    <p className='mt-6 sm:mx-20 text-gray-400 w-11/12 mx-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi omnis sunt suscipit sequi commodi, et ullam adipisci quam debitis ad? Animi nulla neque eos molestias libero veritatis sapiente, corrupti eveniet. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores est officia, eaque obcaecati alias excepturi nulla voluptas, tenetur laudantium dolor asperiores? Doloribus aspernatur ea possimus modi labore? Unde, provident nobis!</p>
-    <p className='mt-6 sm:mx-20 mx-6 font-semibold border-b-2 border-black w-fit'>Read more</p>
+    <h1 className='font-bold text-2xl mt-4 lg:mx-20 mx-2 sm:mx-8'>Handmade pieces that took time to make</h1>
+    <p className='mt-6 lg:mx-20 sm:mx-8 text-gray-400 w-11/12 mx-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi omnis sunt suscipit sequi commodi, et ullam adipisci quam debitis ad? Animi nulla neque eos molestias libero veritatis sapiente, corrupti eveniet. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores est officia, eaque obcaecati alias excepturi nulla voluptas, tenetur laudantium dolor asperiores? Doloribus aspernatur ea possimus modi labore? Unde, provident nobis!</p>
+    <p className='mt-6 lg:mx-20 mx-6 font-semibold border-b-2 border-black w-fit sm:mx-8'>Read more</p>
     </div>
 </div>
 

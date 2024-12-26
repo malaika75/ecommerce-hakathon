@@ -23,11 +23,11 @@ function page() {
     <div>
         <Image src='/images/Rectangle 1.png' alt='banner' height={100} width={100} className='relative w-screen mb-20' unoptimized placeholder='empty' quality={100}></Image>
                     
-        <div className='absolute lg:top-28 sm:top-20 top-[80px] left-1/2 xl:left-1/3 xl:ml-44 -ml-4'>
-      <Image src='/images/logo.png' alt='banner' height={100} width={100} className='h-10 w-10 sm:h-20 sm:w-20 xl:h-30 xl:w-30'
+        <div className='absolute lg:top-28 sm:top-20 top-[72px] left-1/2 xl:left-1/3 xl:ml-44 -ml-4'>
+      <Image src='/images/logo.png' alt='banner' height={100} width={100} className='h-8 w-8 sm:h-20 sm:w-20 xl:h-30 xl:w-30'
       unoptimized placeholder='empty' quality={100}></Image>
       <h1 className='font-bold sm:text-2xl md:text-4xl -mt-2 sm:-mt-3 sm:ml-2 md:ml-0'>Cart</h1>
-    <div className='flex md:mt-2 -ml-4 -mt-1'>
+    <div className='flex md:mt-2 -ml-6 sm:-ml-4 -mt-1'>
     <Link href='/'>
     <p className='font-semibold sm:ml-2'>Home</p>
     </Link>
@@ -39,7 +39,7 @@ function page() {
             
 
 <div className='grid lg:grid-cols-2 grid-cols-1'>
-    <div className='mt-14 sm:mx-10 mx-2 ml-6'>
+    <div className='mt-14 sm:mx-10 mx-2 ml6'>
     <Table>
   <TableCaption></TableCaption>
   <TableHeader className='bg-amber-100'>
@@ -54,10 +54,10 @@ function page() {
   <TableBody className=''>
     <TableRow className='mt-10'>
       <TableCell className="font-medium flex"><Image src='/images/blue-sofa-img.png' alt='product-img' height={100} width={100} className='bg-amber-100 mt-6'></Image>
-      <p className='mt-10 ml-4 text-gray-400'>Assgard sofa</p>
+      <p className='sm:mt-10 ml-4 mt-14 text-gray-400'>Assgard sofa</p>
       </TableCell>
       <TableCell>25,000,00</TableCell>
-      <TableCell className=''>1</TableCell>
+      <TableCell className='-mr-6'>1</TableCell>
       <TableCell className="text-right">25,000,00</TableCell>
       <RiDeleteBinFill className='text-yellow-700 text-xl mb-10 mx-2 cursor-pointer'/>
     </TableRow>

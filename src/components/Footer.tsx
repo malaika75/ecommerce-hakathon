@@ -34,8 +34,8 @@ function Footer() {
 <div className='lg:ml-60'>
     <p className='text-gray-500 sm:mt-4 mt-8'>Newsletters</p>
     <div className='flex sm:mt-10 mt-2'>
-    <input type='email' placeholder='Enter your email address' className='underline'></input>
-    <p className='underline'>Subscribe</p>
+    <input type='email' placeholder='Enter your email address' className='border-b border-black -ml-4'></input>
+    <p className='border-b border-black'>Subscribe</p>
     </div>
 </div>
     </div>
