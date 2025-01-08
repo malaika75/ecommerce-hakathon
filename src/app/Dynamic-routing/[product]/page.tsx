@@ -1,16 +1,9 @@
-import Link from 'next/link'
 import React from 'react'
 
-
-function product({params}:{params:{product:string}}) {
+function page() {
   return (
-    <>
-
-    <div>product details</div>
-    <p>{params.product}</p>
-
-    </>
+    <div>page</div>
   )
 }
 
-export default product
+export default page
