@@ -10,8 +10,8 @@ function page() {
     <div>
         <Image src='/images/Rectangle 1.png' alt='banner' height={200} width={100} className='relative w-screen mb-20' unoptimized placeholder='empty' quality={100}></Image>
         
-        <div className='absolute lg:top-28 sm:top-20 top-[80px] left-1/2 xl:left-1/3 xl:ml-44 -ml-4'>
-        <Image src='/images/logo.png' alt='banner' height={100} width={100} className='h-10 w-10 sm:h-20 sm:w-20 xl:h-30 xl:w-30'
+        <div className='absolute lg:top-28 sm:top-20 top-[72px] left-1/2 xl:left-1/3 xl:ml-44 -ml-4'>
+        <Image src='/images/logo.png' alt='banner' height={100} width={100} className='h-8 w-8 sm:h-20 sm:w-20 xl:h-30 xl:w-30'
         unoptimized placeholder='empty' quality={100}></Image>
         <h1 className='font-bold sm:text-2xl md:text-4xl -ml-5 md:-ml-10 -mt-2 sm:-mt-3'>Checkout</h1>
         <div className='flex md:mt-2 -ml-9 -mt-1'>
