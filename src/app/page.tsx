@@ -1,9 +1,50 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaRegHeart } from "react-icons/fa";
 import ShowMore from "@/components/ShowMore";
+import {client} from '@/sanity/lib/client'
+import {urlFor} from '@/sanity/lib/image'
+import CartButton from "@/components/CartButton";
+import WishButton from "@/components/WishButton";
 
-export default function Home() {
+
+interface Product{
+  _id:string,
+  title:string,
+  price:number,
+  productImage:string,
+  description:string,
+  discountPercentage:number,
+  slug:string,
+  quantity:number
+ } 
+
+export default async function Home() {
+    
+  const query = `*[_type == 'product'][0..7]{
+  _id,
+  title,
+  price,
+  productImage,
+  description,
+  discountPercentage,
+  "slug": slug.current
+}`
+
+const product:Product[] = await client.fetch(query)
+
+const showmoreQuery = `*[_type == 'product'][9..16]{
+  _id,
+  title,
+  price,
+  productImage,
+  description,
+  discountPercentage,
+  "slug": slug.current
+
+}`;
+
+const products = await client.fetch(showmoreQuery);
+
   return (
     <>
     <div className="">
@@ -13,7 +54,7 @@ export default function Home() {
         <p className="font-semibold">New Arrivals</p>
         <h1 className="text-2xl w-6/12 text-yellow-700 font-bold ">Discover Our New Collection</h1>
         <p className="w-9/12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid nihil dolorum itaque dolor. Incidunt, similique veritatis non quos ratione assumenda.</p>
-        <Link href='/product-details'>
+        <Link href='/shop'>
         <button className="p-4 bg-yellow-700 text-white px-8 cursor-pointer mt-2">Buy Now</button>
         </Link>
         </div>
@@ -40,40 +81,49 @@ export default function Home() {
 
 <div className="text-center text-2xl font-bold mt-20">Our Product</div>
 
-<div className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 mt-20 mb-10 mx-6">
-  {[
-    { src: '/images/product-4.png', label: 'Syltherine', desc: 'style cafe chair', price: 'Rp 2500,000', oldPrice: 'Rp 3500,000' },
-    { src: '/images/product-5.png', label: 'Leviosa', desc: 'style cafe chair', price: 'Rp 2500,000', oldPrice: 'Rp 3500,000' },
-    { src: '/images/product-6.png', label: 'Lolito', desc: 'luxury sofa set', price: 'Rp 700,000', oldPrice: 'Rp 1400,000' },
-    { src: '/images/product-7.jpeg', label: 'Respira', desc: 'Outdoor bar table and stool', price: 'Rp 500,000' },
-    { src: '/images/product-8.png', label: 'Grifo', desc: 'night lamp', price: 'Rp 1,500,000' },
-    { src: '/images/product-9.png', label: 'Muggo', desc: 'small mug', price: 'Rp 150,000' },
-    { src: '/images/product-10.jpeg', label: 'Pingky', desc: 'cute bed set', price: 'Rp 700,000', oldPrice: 'Rp 14,000,000' },
-    { src: '/images/product-11.jpeg', label: 'Potty', desc: 'minimalist flower pot', price: 'Rp 5000,000' },
-  ].map((item, index) => (
-    <div key={index} className="group relative bg-slate-100 p-4 text-center">
-      <Image src={item.src} alt="product-img" height={400} width={400} className="h-60 mx-auto"></Image>
-      <p className="mt-4 font-semibold">{item.label}</p>
-      <p className="text-gray-400">{item.desc}</p>
-      <div className="flex justify-center gap-2 mt-2">
-        <p className="font-semibold">{item.price}</p>
-        {item.oldPrice && <p className="text-gray-400 line-through">{item.oldPrice}</p>}
-      </div>
 
-      <div className="absolute group-hover:opacity-60 object-cover inset-0 opacity-0 bg-black h-60 w-72 mx-auto transform translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out z-10 text-center mt-4">
-      <div className='bg-white text-yellow-700 border-2 w-40 mt-14 p-4 text-center font-semibold ml-14 cursor-pointer'>
-       Add to cart
+<div className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 mt-20 mb-10 mx-6">
+  {product.map((product: Product, index) => (
+    <div key={index} className="group relative bg-slate-100 p-4 text-center">
+
+      <Link href={`/products/${product.slug}`}>
+  <div className="relative">
+        <Image 
+          src={urlFor(product.productImage).url()} 
+          alt="product-img" 
+          height={400} 
+          width={400} 
+          className="h-60 mx-auto"
+        />
+        {product.discountPercentage ? (
+          <div className="absolute top-2 right-2 bg-green-700 text-white rounded-full text-sm h-8 w-8 flex items-center justify-center shadow-lg">
+            {product.discountPercentage}%
+          </div>
+        ):null}
       </div>
+      <p className="mt-4 font-semibold">{product.title}</p>
+      <p className="text-gray-400 line-clamp-2">{product.description}</p>
+      <div className="flex justify-center gap-2 mt-2">
+        <p className="font-semibold">${product.price}</p>
+      </div>
+      
+<div className="absolute group-hover:opacity-70 object-cover inset-0 opacity-0 bg-black h-60 w-72 mx-auto transform translate-y-5xl group-hover:translate-y-0 transition-transform duration-700 ease-in-out z-10 text-center mt-4">
+
+<CartButton product={product} />
+
 <div className="flex p-6 gap-4 justify-center text-xl">
+  <Link href='/checkout'>
       <button className="text-white hover:scale-125">+checkout</button>
-      <FaRegHeart className="text-white cursor-pointer hover:text-red-500 hover:scale-100"/>
+      </Link>
+<WishButton product={product}/>
       </div>
 </div>
+</Link>
     </div>
   ))}
 </div>
 
-<ShowMore/>
+<ShowMore products={products}/>
 
 <div className="h-[500px] bg-amber-50 mt-10 flex">
   <div className="md:p-20 p-4">
