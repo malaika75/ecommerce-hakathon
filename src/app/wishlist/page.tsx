@@ -2,6 +2,7 @@
 import React from "react";
 import { useCart } from "@/app/context/CartContext";
 import {urlFor} from '@/sanity/lib/image'
+import Image from "next/image";
 
 const WishlistPage = () => {
   const { wishlistItems, removeFromWishlist } = useCart();
@@ -23,11 +24,12 @@ const WishlistPage = () => {
             key={item._id}
             className="border border-yellow-700 p-4 rounded-lg shadow-lg flex flex-col items-center transition-transform transform hover:scale-105 bg-white"
           >
-            <img
+            <Image
               src={urlFor(item.productImage).url()}
               alt={item.title}
               className="w-32 h-32 sm:w-40 sm:h-40 object-cover mb-4 rounded-md"
-            />
+              width={100} height={100}></Image>
+
             <h2 className="text-lg font-bold text-center text-yellow-700">{item.title}</h2>
             <p className="text-gray-500">${item.price.toFixed(2)}</p>
             <button

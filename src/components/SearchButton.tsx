@@ -4,11 +4,22 @@ import { IoSearch } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import {client} from '@/sanity/lib/client'
 
-const SearchModal = ({ onSearch }: { onSearch: (results: any[]) => void }) => {
+interface Product {
+  _id: string;
+  title: string;
+  productImage: string; 
+  category: string;
+}
+
+interface SearchModalProps {
+  onSearch: (results: Product[]) => void;
+}
+
+const SearchModal: React.FC<SearchModalProps> = ({ onSearch }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter();
 
   const handleSearch = async () => {
     if (!query.trim()) {
@@ -20,7 +31,7 @@ const SearchModal = ({ onSearch }: { onSearch: (results: any[]) => void }) => {
     console.log("Searching for:", query); 
 
     try {
-      const queryResult = await client.fetch(
+      const queryResult: Product[] = await client.fetch(
         `*[_type == "product" && (title match "${query}*" || category match "${query}*")]{
           _id,
           title,

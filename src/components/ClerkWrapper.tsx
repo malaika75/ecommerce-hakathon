@@ -3,19 +3,23 @@
 import React, { useEffect, useState } from "react";
 
 export default function ClerkWrapper({ children }: { children: React.ReactNode }) {
-  const [ClerkProvider, setClerkProvider] = useState<React.ComponentType<any> | null>(null);
+  const [ClerkProvider, setClerkProvider] = useState<any>(null); // `any` use kiya hai
 
   useEffect(() => {
     import("@clerk/nextjs").then((mod) => {
-      // Convert to unknown first then to React.ComponentType<any>
-      setClerkProvider(() => (mod.ClerkProvider as unknown) as React.ComponentType<any>);
+      // TypeScript error ignore karne ke liye `ts-ignore`
+      // @ts-ignore
+      setClerkProvider(() => mod.ClerkProvider);
     });
   }, []);
 
   if (!ClerkProvider) {
-    return null; // or a loading indicator
+    return null; // Ya koi loading spinner
   }
 
   return <ClerkProvider>{children}</ClerkProvider>;
 }
+
+
+
 

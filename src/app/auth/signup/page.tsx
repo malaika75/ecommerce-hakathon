@@ -1,7 +1,11 @@
+"use client"
 import { SignUp } from "@clerk/nextjs";
 
 function SignUpPage() {
-  return <SignUp forceRedirectUrl="/checkout" />;
+  return 
+  <div className="flex items-center justify-center">
+  <SignUp forceRedirectUrl="/checkout"/>;
+  </div>
 }
 
 export default SignUpPage;

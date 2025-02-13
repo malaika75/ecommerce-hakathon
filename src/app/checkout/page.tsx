@@ -7,15 +7,33 @@ import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
 import Benefits from "@/components/Benefits";
 import { urlFor } from "@/sanity/lib/image";
-import { loadStripe } from "@stripe/stripe-js";
 import { useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+
+
 
 
 const CheckoutPage: React.FC = () => {
+  const { user, isLoaded } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoaded && !user) {
+      router.push("/signup"); 
+    }
+  }, [user, isLoaded, router]);
+
+  // ✅ Jab tak user ka data load nahi hota, kuch bhi render mat karo
+  if (!isLoaded) {
+    return <p>Loading...</p>;  // Ya ek loader show kar do
+  }
+
+  if (!user) {
+    return null;  // Redirect hone ka wait karne ke liye
+  }
+
   const { cartItems, clearCart } = useCart();
-  const { user } = useUser();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<string>("");
@@ -27,17 +45,19 @@ const CheckoutPage: React.FC = () => {
   const [postalCode, setPostalCode] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [orderSuccess, setOrderSuccess] = useState<boolean>(false); // for success message
-const [orderId, setOrderId] = useState<string | null>(null);
+  const [orderId, setOrderId] = useState<string | null>(null);
   
   const searchParams = useSearchParams();
 
   useEffect(() => {
     const success = searchParams.get('success');
     const orderId = searchParams.get('order_id');
+    
 
     if (success === 'true' && orderId) {
       setOrderSuccess(true);
       setOrderId(orderId);
+      
       clearCart();
     }
   }, [searchParams, clearCart]);
@@ -67,7 +87,7 @@ const [orderId, setOrderId] = useState<string | null>(null);
     try {
       if (paymentMethod === "bankTransfer") {
         // Handle Bank Transfer
-        const stripe = await stripePromise;
+        
         const res = await fetch('/api/payment', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -114,6 +134,7 @@ const [orderId, setOrderId] = useState<string | null>(null);
     } finally {
       setIsProcessing(false);
     }
+    
   };
 
   return (
@@ -128,7 +149,7 @@ const [orderId, setOrderId] = useState<string | null>(null);
           unoptimized
           placeholder="empty"
           quality={100}
-        />
+        ></Image>
         <div className="absolute lg:top-28 sm:top-20 top-[72px] left-1/2 xl:left-1/3 xl:ml-44 -ml-4">
           <Image
             src="/images/logo.png"
@@ -139,7 +160,7 @@ const [orderId, setOrderId] = useState<string | null>(null);
             unoptimized
             placeholder="empty"
             quality={100}
-          />
+          ></Image>
           <h1 className="font-bold sm:text-2xl md:text-4xl -ml-5 md:-ml-10 -mt-2 sm:-mt-3">
             Checkout
           </h1>
@@ -304,32 +325,6 @@ const [orderId, setOrderId] = useState<string | null>(null);
             <h2 className="text-xl font-semibold">Subtotal</h2>
             <p>$ {cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}</p>
           </div>
-
-          {/* Payment Options */}
-          {/* <div className="mt-6">
-            <h2 className="text-xl font-semibold">Payment Method</h2> */}
-            {/* <div>
-              <label>
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value="bankTransfer"
-                  onChange={handlePaymentMethodChange}
-                  checked={paymentMethod === "bankTransfer"}
-                />
-                Bank Transfer
-              </label>
-              <label className="ml-4">
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value="cod"
-                  onChange={handlePaymentMethodChange}
-                  checked={paymentMethod === "cod"}
-                />
-                Cash on Delivery
-              </label>
-            </div> */}
 
 <div className='border-t mt-10 p-6 w-11/12'>
 <p className='font-semibold'> Direct bank transfer</p>

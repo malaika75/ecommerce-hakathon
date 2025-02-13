@@ -3,10 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaStar, FaTwitterSquare } from "react-icons/fa";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
-import { MdKeyboardArrowRight } from "react-icons/md";
 import Link from 'next/link';
-import Image from 'next/image';
-import { urlFor } from '@/sanity/lib/image';
 import CartButton from "@/components/CartButton";
 
 interface Product {

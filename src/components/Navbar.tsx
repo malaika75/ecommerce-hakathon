@@ -90,7 +90,7 @@ function Navbar() {
           </DropdownMenu>
         ) : (
           // Otherwise, show the signup icon
-          <Link href='/signup'>
+          <Link href='/auth/signup'>
             <FaRegUser className="text-xl" />
           </Link>
         )}

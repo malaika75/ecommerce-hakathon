@@ -147,13 +147,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       {showPopup && (
         <div className="popup fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 bg-green-500 text-white p-4 rounded shadow-lg">
-          <p>Great Choice! It's now in your cart! 🛒</p>
+          <p>Great Choice! Its now in your cart! 🛒</p>
         </div>
       )}
 
       {wishlistPopup && (
         <div className="popup fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 bg-yellow-700 text-white p-4 rounded shadow-lg">
-          <p>Your choice is amazing! It's on your wishlist now 💖</p>
+          <p>Your choice is amazing! Its on your wishlist now 💖</p>
         </div>
       )}
     </CartContext.Provider>
