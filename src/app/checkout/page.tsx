@@ -143,7 +143,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
 import Benefits from "@/components/Benefits";
 import { urlFor } from "@/sanity/lib/image";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams} from "next/navigation";
 
 const CheckoutPage: React.FC = () => {
   // All hooks are now declared at the top:
