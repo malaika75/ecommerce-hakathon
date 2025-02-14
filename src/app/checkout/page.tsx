@@ -1,39 +1,156 @@
+// "use client";
+// import React, { useState , useEffect } from "react";
+// import { useCart } from "@/app/context/CartContext";
+// import { useUser } from "@clerk/nextjs";
+// import Image from "next/image";
+// import { IoIosArrowForward } from "react-icons/io";
+// import Link from "next/link";
+// import Benefits from "@/components/Benefits";
+// import { urlFor } from "@/sanity/lib/image";
+// import { useSearchParams } from "next/navigation";
+// import { useRouter} from "next/navigation";
+
+
+// const CheckoutPage: React.FC = () => {
+//   const { user, isLoaded } = useUser();
+//   const router = useRouter();
+
+//   useEffect(() => {
+//     if (isLoaded && !user) {
+//       router.push("/signup"); 
+//     }
+//   }, [user, isLoaded, router]);
+
+//   // ✅ Jab tak user ka data load nahi hota, kuch bhi render mat karo
+//   if (!isLoaded) {
+//     return <p>Loading...</p>;  // Ya ek loader show kar do
+//   }
+
+//   if (!user) {
+//     return null;  // Redirect hone ka wait karne ke liye
+//   }
+
+//   const { cartItems, clearCart } = useCart();
+//   const [isProcessing, setIsProcessing] = useState(false);
+//   const [error, setError] = useState<string | null>(null);
+//   const [paymentMethod, setPaymentMethod] = useState<string>("");
+//   const [fullName, setFullName] = useState<string>("");
+//   const [email, setEmail] = useState<string>("");
+//   const [phone, setPhone] = useState<string>("");
+//   const [address, setAddress] = useState<string>("");
+//   const [city, setCity] = useState<string>("");
+//   const [postalCode, setPostalCode] = useState<string>("");
+//   const [country, setCountry] = useState<string>("");
+//   const [orderSuccess, setOrderSuccess] = useState<boolean>(false); // for success message
+//   const [orderId, setOrderId] = useState<string | null>(null);
+  
+//   const searchParams = useSearchParams();
+
+//   useEffect(() => {
+//     const success = searchParams.get('success');
+//     const orderId = searchParams.get('order_id');
+    
+
+//     if (success === 'true' && orderId) {
+//       setOrderSuccess(true);
+//       setOrderId(orderId);
+      
+//       clearCart();
+//     }
+//   }, [searchParams, clearCart]);
+
+
+//   const handlePaymentMethodChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setPaymentMethod(e.target.value);
+//   };
+
+//   const handleCheckout = async () => {
+//     if (!cartItems.length) {
+//       setError("Your cart is empty!");
+//       return;
+//     }
+
+//     if (!paymentMethod) {
+//       setError("Please select a payment method!");
+//       return;
+//     }
+
+//     if (!fullName || !email || !phone || !address || !city || !postalCode || !country) {
+//       setError("Please fill in all the billing details.");
+//       return;
+//     }
+
+//     setIsProcessing(true);
+//     try {
+//       if (paymentMethod === "bankTransfer") {
+//         // Handle Bank Transfer
+        
+//         const res = await fetch('/api/payment', {
+//           method: 'POST',
+//           headers: { 'Content-Type': 'application/json' },
+//           body: JSON.stringify({
+//             cartItems,
+//             paymentMethod,
+//             origin: window.location.origin,
+//           }),
+//         });
+        
+//         const data = await res.json();
+        
+//         if (data.url) {
+//           // Redirect to Stripe Checkout if URL is returned
+//           window.location.href = data.url;
+//         } else if (data.success) {
+//           // Handle Cash on Delivery success
+//           setOrderSuccess(true);
+//         clearCart();  // Cart clear kar dena
+//         }
+        
+//       } else if (paymentMethod === "cod") {
+//         // Handle COD (Cash on Delivery)
+//         const orderDetails = {
+//           cartItems,
+//           fullName,
+//           email,
+//           phone,
+//           address,
+//           city,
+//           postalCode,
+//           country,
+//           paymentMethod,
+//         };
+
+//         // Show success message and order details
+//         console.log("Order Details for COD: ", orderDetails);
+//         setOrderSuccess(true);
+//         clearCart(); 
+//       }
+//     } catch (err) {
+//       setError("An error occurred during checkout.");
+//       console.error(err);
+//     } finally {
+//       setIsProcessing(false);
+//     }
+    
+//   };
+
+
 "use client";
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "@/app/context/CartContext";
-import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
 import Benefits from "@/components/Benefits";
 import { urlFor } from "@/sanity/lib/image";
-import { useSearchParams } from "next/navigation";
-import { useRouter} from "next/navigation";
-
-
-
-
+import { useSearchParams, useRouter } from "next/navigation";
 
 const CheckoutPage: React.FC = () => {
-  const { user, isLoaded } = useUser();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (isLoaded && !user) {
-      router.push("/signup"); 
-    }
-  }, [user, isLoaded, router]);
-
-  // ✅ Jab tak user ka data load nahi hota, kuch bhi render mat karo
-  if (!isLoaded) {
-    return <p>Loading...</p>;  // Ya ek loader show kar do
-  }
-
-  if (!user) {
-    return null;  // Redirect hone ka wait karne ke liye
-  }
-
+  // All hooks are now declared at the top:
+  
   const { cartItems, clearCart } = useCart();
+  const searchParams = useSearchParams();
+
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<string>("");
@@ -44,25 +161,20 @@ const CheckoutPage: React.FC = () => {
   const [city, setCity] = useState<string>("");
   const [postalCode, setPostalCode] = useState<string>("");
   const [country, setCountry] = useState<string>("");
-  const [orderSuccess, setOrderSuccess] = useState<boolean>(false); // for success message
+  const [orderSuccess, setOrderSuccess] = useState<boolean>(false);
   const [orderId, setOrderId] = useState<string | null>(null);
-  
-  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const success = searchParams.get('success');
-    const orderId = searchParams.get('order_id');
-    
-
-    if (success === 'true' && orderId) {
+    const success = searchParams.get("success");
+    const orderIdParam = searchParams.get("order_id");
+    if (success === "true" && orderIdParam) {
       setOrderSuccess(true);
-      setOrderId(orderId);
-      
+      setOrderId(orderIdParam);
       clearCart();
     }
   }, [searchParams, clearCart]);
 
-
+  // Handlers and checkout logic
   const handlePaymentMethodChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(e.target.value);
   };
@@ -87,30 +199,27 @@ const CheckoutPage: React.FC = () => {
     try {
       if (paymentMethod === "bankTransfer") {
         // Handle Bank Transfer
-        
-        const res = await fetch('/api/payment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        const res = await fetch("/api/payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             cartItems,
             paymentMethod,
             origin: window.location.origin,
           }),
         });
-        
         const data = await res.json();
-        
+
         if (data.url) {
           // Redirect to Stripe Checkout if URL is returned
           window.location.href = data.url;
         } else if (data.success) {
           // Handle Cash on Delivery success
           setOrderSuccess(true);
-        clearCart();  // Cart clear kar dena
+          clearCart();
         }
-        
       } else if (paymentMethod === "cod") {
-        // Handle COD (Cash on Delivery)
+        // Handle Cash on Delivery
         const orderDetails = {
           cartItems,
           fullName,
@@ -122,11 +231,9 @@ const CheckoutPage: React.FC = () => {
           country,
           paymentMethod,
         };
-
-        // Show success message and order details
         console.log("Order Details for COD: ", orderDetails);
         setOrderSuccess(true);
-        clearCart(); 
+        clearCart();
       }
     } catch (err) {
       setError("An error occurred during checkout.");
@@ -134,7 +241,6 @@ const CheckoutPage: React.FC = () => {
     } finally {
       setIsProcessing(false);
     }
-    
   };
 
   return (
