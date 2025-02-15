@@ -146,7 +146,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { useSearchParams} from "next/navigation";
 
 const CheckoutPage: React.FC = () => {
-  // All hooks are now declared at the top:
+  
   
   const { cartItems, clearCart } = useCart();
   const searchParams = useSearchParams();
