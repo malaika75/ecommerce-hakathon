@@ -42,21 +42,25 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [wishlistPopup, setWishlistPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    // Load cart and wishlist from localStorage using user-specific keys
-    const storedCart = localStorage.getItem(cartKey);
-    const storedWishlist = localStorage.getItem(wishlistKey);
-    if (storedCart) setCartItems(JSON.parse(storedCart));
-    if (storedWishlist) setWishlistItems(JSON.parse(storedWishlist));
-    setIsLoading(false);
-  }, [cartKey, wishlistKey]);
 
   useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem(cartKey, JSON.stringify(cartItems));
-      localStorage.setItem(wishlistKey, JSON.stringify(wishlistItems));
+    const storedCart = localStorage.getItem(cartKey);
+    const storedWishlist = localStorage.getItem(wishlistKey);
+    const guestCart = localStorage.getItem("cartItems_guest");
+
+    if (userId !== "guest" && guestCart && !storedCart) {
+      // Migrate guest cart to the new user cart
+      localStorage.setItem(cartKey, guestCart);
+      localStorage.removeItem("cartItems_guest");
+      setCartItems(JSON.parse(guestCart));
+    } else if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
     }
-  }, [cartItems, wishlistItems, isLoading, cartKey, wishlistKey]);
+
+    if (storedWishlist) setWishlistItems(JSON.parse(storedWishlist));
+
+    setIsLoading(false);
+  }, [userId]);
 
   const addToCart = (product: CartItem) => {
     setCartItems((prevItems) => {
