@@ -163,6 +163,8 @@ const CheckoutPage: React.FC = () => {
   const [country, setCountry] = useState<string>("");
   const [orderSuccess, setOrderSuccess] = useState<boolean>(false);
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [deliveryCharges, setDeliveryCharges] = useState<number>(0);
+  
 
   useEffect(() => {
     const success = searchParams.get("success");
@@ -179,69 +181,415 @@ const CheckoutPage: React.FC = () => {
     setPaymentMethod(e.target.value);
   };
 
-  const handleCheckout = async () => {
-    if (!cartItems.length) {
-      setError("Your cart is empty!");
-      return;
-    }
+  // const handleCheckout = async () => {
+  //   if (!cartItems.length) {
+  //     setError("Your cart is empty!");
+  //     return;
+  //   }
 
-    if (!paymentMethod) {
-      setError("Please select a payment method!");
-      return;
-    }
+  //   if (!paymentMethod) {
+  //     setError("Please select a payment method!");
+  //     return;
+  //   }
 
-    if (!fullName || !email || !phone || !address || !city || !postalCode || !country) {
-      setError("Please fill in all the billing details.");
-      return;
-    }
+  //   if (!fullName || !email || !phone || !address || !city || !postalCode || !country) {
+  //     setError("Please fill in all the billing details.");
+  //     return;
+  //   }
 
-    setIsProcessing(true);
-    try {
-      if (paymentMethod === "bankTransfer") {
-        // Handle Bank Transfer
-        const res = await fetch("/api/payment", {
+  //   setIsProcessing(true);
+  //   try {
+  //     if (paymentMethod === "bankTransfer") {
+  //       // Handle Bank Transfer
+  //       const res = await fetch("/api/payment", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({
+  //           cartItems,
+  //           paymentMethod,
+  //           origin: window.location.origin,
+  //         }),
+  //       });
+  //       const data = await res.json();
+
+  //       if (data.deliveryCharges) {
+  //         setDeliveryCharges(data.deliveryCharges); // NEW
+  //       }
+        
+  //       if (data.url) {
+  //         // Redirect to Stripe Checkout if URL is returned
+  //         window.location.href = data.url;
+  //       } else if (data.success) {
+  //         // Handle Cash on Delivery success
+  //         setOrderSuccess(true);
+  //         clearCart();
+  //       }
+  //   } else if (paymentMethod === "cod") {
+  //     const res = await fetch("/api/payment", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         cartItems,
+  //         fullName,
+  //         email,
+  //         phone,
+  //         address,
+  //         city,
+  //         postalCode,
+  //         country,
+  //         paymentMethod,
+  //       }),
+  //     });
+    
+  //     const data = await res.json(); // Backend response fetch karo
+    
+  //     if (data.success) {
+  //       setOrderSuccess(true);
+  //       setOrderId(data.orderDetails.orderId);
+  //       setDeliveryCharges(data.orderDetails.deliveryCharges);
+  //       clearCart();
+  //     } else {
+  //       setError("Failed to process order.");
+  //     }
+  //   }
+  //   } catch (err) {
+  //     setError("An error occurred during checkout.");
+  //     console.error(err);
+  //   } finally {
+  //     setIsProcessing(false);
+  //   }
+  // };
+
+//   const handleCheckout = async () => {
+//   setIsProcessing(true);
+//   setError("");
+
+//   try {
+//     if (paymentMethod === "stripe") {
+//       // 1️⃣ Step: Stripe Payment Session Create karo
+//       const res = await fetch("/api/payment", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//           cartItems,
+//           totalAmount: cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0),
+//         }),
+//       });
+
+//       const data = await res.json();
+
+//       if (data.url) {
+//         // 2️⃣ Step: Payment complete hone ke baad order Sanity me save hoga (backend webhook ya manual)
+//         // Lekin frontend par bhi hum ek order save karwa dete hain for learning:
+//         await fetch("/api/order", {
+//           method: "POST",
+//           headers: { "Content-Type": "application/json" },
+//           body: JSON.stringify({
+//             customer: {
+//               name: fullName,
+//               email,
+//               phone,
+//               address,
+//               city,
+//               postalCode,
+//               country,
+//             },
+//             items: cartItems.map((item) => ({
+//               title: item.title,
+//               quantity: item.quantity,
+//               price: item.price,
+//             })),
+//             totalAmount: cartItems.reduce(
+//               (acc, item) => acc + item.price * item.quantity,
+//               0
+//             ),
+//             paymentStatus: "paid",
+//           }),
+//         });
+
+//         window.location.href = data.url; // Stripe page redirect
+//       } else {
+//         throw new Error("Stripe session creation failed.");
+//       }
+//     }
+
+//     // 3️⃣ Step: Cash on Delivery (COD)
+//     else if (paymentMethod === "cod") {
+//       const res = await fetch("/api/order", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//           customer: {
+//             name: fullName,
+//             email,
+//             phone,
+//             address,
+//             city,
+//             postalCode,
+//             country,
+//           },
+//           items: cartItems.map((item) => ({
+//             title: item.title,
+//             quantity: item.quantity,
+//             price: item.price,
+//           })),
+//           totalAmount: cartItems.reduce(
+//             (acc, item) => acc + item.price * item.quantity,
+//             0
+//           ),
+//           paymentStatus: "pending",
+//         }),
+//       });
+
+//       const data = await res.json();
+
+//       if (res.ok) {
+//         setOrderSuccess(true);
+//         setOrderId(data.orderId || data._id);
+//         clearCart();
+//       } else {
+//         setError("Failed to save COD order.");
+//       }
+//     }
+//   } catch (err) {
+//     console.error(err);
+//     setError("Something went wrong during checkout.");
+//   } finally {
+//     setIsProcessing(false);
+//   }
+// };
+
+
+// const handleCheckout = async () => {
+//   if (!cartItems.length) {
+//     setError("Your cart is empty!");
+//     return;
+//   }
+
+//   if (!paymentMethod) {
+//     setError("Please select a payment method!");
+//     return;
+//   }
+
+//   if (!fullName || !email || !phone || !address || !city || !postalCode || !country) {
+//     setError("Please fill in all the billing details.");
+//     return;
+//   }
+
+//   setIsProcessing(true);
+//   setError("");
+
+//   try {
+//     // ---------- 💳 Bank Transfer (Stripe) ----------
+//     if (paymentMethod === "bankTransfer") {
+//       const res = await fetch("/api/payment", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//           cartItems,
+//           paymentMethod,
+//           origin: window.location.origin,
+//           totalAmount: cartItems.reduce(
+//             (acc, item) => acc + item.price * item.quantity,
+//             0
+//           ),
+//         }),
+//       });
+
+//       const data = await res.json();
+
+//       if (data.deliveryCharges) {
+//         setDeliveryCharges(data.deliveryCharges);
+//       }
+
+//       if (data.url) {
+//         // Redirect to Stripe Checkout page
+//         window.location.href = data.url;
+//       } else if (data.success) {
+//         // If no URL, order processed directly
+//         setOrderSuccess(true);
+//         clearCart();
+//       } else {
+//         throw new Error("Stripe session creation failed.");
+//       }
+//     }
+
+//     // ---------- 📦 Cash on Delivery (COD) ----------
+//     else if (paymentMethod === "cod") {
+//       const res = await fetch("/api/order", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//           customer: {
+//             name: fullName,
+//             email,
+//             phone,
+//             address,
+//             city,
+//             postalCode,
+//             country,
+//           },
+//           items: cartItems.map((item) => ({
+//             title: item.title,
+//             quantity: item.quantity,
+//             price: item.price,
+//           })),
+//           totalAmount: cartItems.reduce(
+//             (acc, item) => acc + item.price * item.quantity,
+//             0
+//           ),
+//           paymentStatus: "pending",
+//         }),
+//       });
+
+//       const data = await res.json();
+
+//       if (res.ok) {
+//         setOrderSuccess(true);
+//         setOrderId(data.orderId || data._id);
+//         clearCart();
+//       } else {
+//         setError("Failed to save COD order.");
+//       }
+//     }
+//   } catch (err) {
+//     console.error(err);
+//     setError("Something went wrong during checkout.");
+//   } finally {
+//     setIsProcessing(false);
+//   }
+// };
+
+
+const handleCheckout = async () => {
+  if (!cartItems.length) {
+    setError("Your cart is empty!");
+    return;
+  }
+
+  if (!paymentMethod) {
+    setError("Please select a payment method!");
+    return;
+  }
+
+  if (!fullName || !email || !phone || !address || !city || !postalCode || !country) {
+    setError("Please fill in all the billing details.");
+    return;
+  }
+
+  setIsProcessing(true);
+  setError("");
+
+  try {
+    // ---------- 💳 Bank Transfer (Stripe) ----------
+    if (paymentMethod === "bankTransfer") {
+      const res = await fetch("/api/payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cartItems,
+          paymentMethod,
+          origin: window.location.origin,
+          totalAmount: cartItems.reduce(
+            (acc, item) => acc + item.price * item.quantity,
+            0
+          ),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.deliveryCharges) {
+        setDeliveryCharges(data.deliveryCharges);
+      }
+
+      // ✅ Save order to Sanity right after Stripe session is created
+      if (data.success || data.url) {
+        await fetch("/api/order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            cartItems,
-            paymentMethod,
-            origin: window.location.origin,
+            customer: {
+              name: fullName,
+              email,
+              phone,
+              address,
+              city,
+              postalCode,
+              country,
+            },
+            items: cartItems.map((item) => ({
+              title: item.title,
+              quantity: item.quantity,
+              price: item.price,
+            })),
+            totalAmount: cartItems.reduce(
+              (acc, item) => acc + item.price * item.quantity,
+              0
+            ),
+            paymentStatus: "paid", // stripe ka payment considered done
+            paymentMethod: "Bank Transfer (Stripe)",
           }),
         });
-        const data = await res.json();
+      }
 
-        if (data.url) {
-          // Redirect to Stripe Checkout if URL is returned
-          window.location.href = data.url;
-        } else if (data.success) {
-          // Handle Cash on Delivery success
-          setOrderSuccess(true);
-          clearCart();
-        }
-      } else if (paymentMethod === "cod") {
-        // Handle Cash on Delivery
-        const orderDetails = {
-          cartItems,
-          fullName,
-          email,
-          phone,
-          address,
-          city,
-          postalCode,
-          country,
-          paymentMethod,
-        };
-        console.log("Order Details for COD: ", orderDetails);
+      if (data.url) {
+        // Redirect to Stripe Checkout page
+        window.location.href = data.url;
+      } else if (data.success) {
         setOrderSuccess(true);
         clearCart();
+      } else {
+        throw new Error("Stripe session creation failed.");
       }
-    } catch (err) {
-      setError("An error occurred during checkout.");
-      console.error(err);
-    } finally {
-      setIsProcessing(false);
     }
-  };
+
+    // ---------- 📦 Cash on Delivery (COD) ----------
+    else if (paymentMethod === "cod") {
+      const res = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customer: {
+            name: fullName,
+            email,
+            phone,
+            address,
+            city,
+            postalCode,
+            country,
+          },
+          items: cartItems.map((item) => ({
+            title: item.title,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+          totalAmount: cartItems.reduce(
+            (acc, item) => acc + item.price * item.quantity,
+            0
+          ),
+          paymentStatus: "pending",
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setOrderSuccess(true);
+        setOrderId(data.orderId || data._id);
+        clearCart();
+      } else {
+        setError("Failed to save COD order.");
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    setError("Something went wrong during checkout.");
+  } finally {
+    setIsProcessing(false);
+  }
+};
+
 
   return (
     <>
@@ -401,36 +749,49 @@ const CheckoutPage: React.FC = () => {
 
         {/* Cart and Payment Section */}
         <div>
-          <div className="space-y-6">
-            <h2 className="text-xl font-semibold">Product</h2>
-            {cartItems.length === 0 ? (
-              <p>Your cart is empty. Add items to your cart before proceeding.</p>
-            ) : (
-              <ul className="space-y-4">
-                {cartItems.map((item) => (
-                  <li key={item._id} className="flex items-center space-x-4 border-b pb-4">
-                    <Image
-                      src={urlFor(item.productImage).url()}
-                      alt={item.title}
-                      width={40}
-                      height={40}
-                      className="w-10 h-10 object-cover"
-                    />
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold">{item.title}</h3>
-                      <p className="text-gray-600">Quantity: {item.quantity} x {item.price}</p>
-                      <p className="text-gray-600">Total: ${item.price * item.quantity}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+          {/* Cart and Payment Section */}
+<div>
+  <div className="space-y-6">
+    <h2 className="text-xl font-semibold">Product</h2>
+    {cartItems.length === 0 ? (
+      <p>Your cart is empty. Add items to your cart before proceeding.</p>
+    ) : (
+      <ul className="space-y-4">
+        {cartItems.map((item) => (
+          <li key={item._id} className="flex items-center space-x-4 border-b pb-4">
+            <Image
+              src={urlFor(item.productImage).url()}
+              alt={item.title}
+              width={40}
+              height={40}
+              className="w-10 h-10 object-cover"
+            />
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <p className="text-gray-600">Quantity: {item.quantity} x {item.price}</p>
+              <p className="text-gray-600">Total: ${item.price * item.quantity}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
 
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold">Subtotal</h2>
-            <p>$ {cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}</p>
-          </div>
+  {/* Delivery Charges Field */}
+  <div className="mt-6">
+    <h2 className="text-xl font-semibold">Delivery Charges</h2>
+    <p>${deliveryCharges}</p>
+  </div>
+
+  {/* Subtotal Field */}
+  <div className="mt-6">
+    <h2 className="text-xl font-semibold">Subtotal</h2>
+    <p>
+      ${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) + deliveryCharges}
+    </p>
+  </div>
+</div>
+
 
 <div className='border-t mt-10 p-6 w-11/12'>
 <p className='font-semibold'> Direct bank transfer</p>
@@ -471,6 +832,13 @@ const CheckoutPage: React.FC = () => {
           <h2 className="text-center">Your Order is Confirmed!</h2>
           <p className="text-center">Thank you for shopping with us. Your order will be processed shortly.</p>
           {orderId && <p className="text-center">Order ID: {orderId}</p>}
+          <Link href="/orders">
+      <button className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition flex
+      justify-center items-center">
+        View Orders
+      </button>
+    </Link>
+
         </div>
       )}
 
@@ -480,6 +848,3 @@ const CheckoutPage: React.FC = () => {
 };
 
 export default CheckoutPage;
-
-
-

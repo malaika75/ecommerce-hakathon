@@ -224,8 +224,23 @@ const ShopPage = ({ product }: { product: Product[] }) => {
           <div className="flex items-center">
             <LiaSlidersHSolid className="md:text-2xl sm:ml-20 mt-2 sm:text-xl" />
             <p className="md:text-2xl text-xl ml-2">Filter</p>
-            <BsFillGridFill className="md:text-2xl sm:ml-14 ml-4 mt-2 sm:text-xl" />
-            <LuGalleryVertical className="md:text-2xl ml-4 mt-2 sm:text-xl" />
+            {/* <BsFillGridFill className="md:text-2xl sm:ml-14 ml-4 mt-2 sm:text-xl" />
+            <LuGalleryVertical className="md:text-2xl ml-4 mt-2 sm:text-xl" /> */}
+            
+          <div className="flex gap-2">
+            <button
+              onClick={() => setViewStyle("grid")}
+              className={`p-2 ${viewStyle === "grid" ? "hover:bg-blue-500 text-white" : "bg-gray-200"}`}
+            >
+              <BsFillGridFill />
+            </button>
+            <button
+              onClick={() => setViewStyle("list")}
+              className={`p-2 ${viewStyle === "list" ? "hover:bg-blue-500 text-white" : "bg-gray-200"}`}
+            >
+              <LuGalleryVertical />
+            </button>
+          </div>
           </div>
           <div className="flex gap-4 mt-4 ml-20">
             <div>
@@ -299,7 +314,7 @@ const ShopPage = ({ product }: { product: Product[] }) => {
           </select>
 
           {/* View Style Toggle */}
-          <div className="flex gap-2">
+          {/* <div className="flex gap-2">
             <button
               onClick={() => setViewStyle("grid")}
               className={`p-2 ${viewStyle === "grid" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
@@ -312,7 +327,7 @@ const ShopPage = ({ product }: { product: Product[] }) => {
             >
               <LuGalleryVertical />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 

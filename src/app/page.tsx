@@ -125,7 +125,7 @@ const products = await client.fetch(showmoreQuery);
 
 <ShowMore products={products}/>
 
-<div className="h-[500px] bg-amber-50 mt-10 flex">
+<div className="h-[600px] bg-amber-50 mt-10 flex">
   <div className="md:p-20 p-4">
     <h1 className="md:text-5xl text-2xl font-bold">50+ Beautyful rooms</h1>
     <span className="md:text-5xl text-2xl font-bold">inspiration</span>
@@ -144,53 +144,9 @@ const products = await client.fetch(showmoreQuery);
   </div>
 
 
-<div className="mt-28 text-center">
+<div className="mt-28 text-center mb-10">
 <p>Share your setup with</p>
 <p className="text-2xl font-bold">#FurniroFurniture</p>
 </div>
-
-<div className="mt-14 flex mx-4">
-<div>
-<Image src='/images/product-14.png' alt='product' className='w-20 xl:w-40 xl:h-60 h-40' height={400} width={100}></Image>
-</div>
-
-<div>
-<Image src='/images/product-16.png' alt='product' className='ml-2 sm:mt-4 h-40 w-40 sm:w-80 mt-7' height={100} width={200}></Image>
-</div>
-
-<div>
-<Image src='/images/product-17.png' alt='product' className='mx-4 h-50 sm:h-40 xl:h-80 w40 sm:w-60 xl:mx-6' height={100} width={100}></Image>
-</div>
-
-<div>
-<Image src='/images/product-18.png' alt='product' className='hidden sm:flex sm:mt-10 xl:ml10 h-40 xl:h-40 mb-8 xl:w-80 xl:mx-4' height={100} width={200}></Image>
-</div>
-
-<div>
-<Image src='/images/product-19.png' alt='product' className='hidden lg:flex mt-5 w-20 lg:w-40 xl:w-60 h-50 xl:h-80 ml-4' height={100} width={200}></Image>
-</div>
-</div>
-
-<div className="flex px-6 mb-20">
-<div>
-<Image src='/images/product-20.png' alt='product' className='w-40' height={100} width={200}></Image>
-</div>
-
-<div>
-<Image src='/images/product-21.png' alt='product' className='mt-2 ml-2' height={100} width={400}></Image>
-</div>
-
-<div>
-<Image src='/images/product-22.png' alt='product' className='sm:mt-8 ml-4 h-40 mt-6 w-60' height={100} width={200}></Image>
-</div>
-
-<div>
-<Image src='/images/product-23.png' alt='product' className='hidden sm:flex sm:ml-6 mt-2 lg:w-40 xl:w-60' height={100} width={100}></Image>
-</div>
-</div>
-
-
-
-
 </>
 )}
